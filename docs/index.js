@@ -1,6 +1,8 @@
 const pointsPerPixel = 0.0004;
 const minDistance = 50;
 const maxDistance = 100;
+const speed = .1;
+const margin = 100;
 
 const canvas = document.querySelector('canvas');
 canvas.width = document.body.clientWidth;
@@ -12,11 +14,17 @@ console.log(`Creating ${pointCount} points`);
 const points = [];
 
 for (let i = 0; i < pointCount; i++) {
+    let vx = (Math.random() - 0.5);
+    let vy = (Math.random() - 0.5);
+    let vl = Math.sqrt(vx * vx + vy * vy);
+    vx = (vx / vl) * speed;
+    vy = (vy / vl) * speed;
+
     points.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5
+        vx,
+        vy
     });
 }
 
@@ -37,7 +45,7 @@ function update() {
         ctx.fillStyle = '#0078D7'
         ctx.strokeStyle = '#0078D7'
         // ctx.beginPath();
-        // ctx.arc(point.x, point.y, 2, 0, Math.PI * 2);
+        // ctx.arc(point.x, point.y, 10, 0, Math.PI * 2);
         // ctx.fill();
 
         points.forEach(other => {
