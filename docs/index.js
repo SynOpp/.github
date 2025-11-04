@@ -57,7 +57,7 @@ function update() {
             alpha = Math.max(0, Math.min(1, alpha));
             ctx.globalAlpha = alpha;
 
-            ctx.strokeStyle = `#0078d7ff`;
+            ctx.strokeStyle = `#5396be`;
 
             if (dist < maxDistance) {
                 ctx.beginPath();
