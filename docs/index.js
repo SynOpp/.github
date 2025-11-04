@@ -1,7 +1,7 @@
 const pointsPerPixel = 0.0004;
-const minDistance = 50;
 const maxDistance = 100;
-const speed = .1;
+const fadeStartDistance = 90;
+const speed = .3;
 const margin = 100;
 
 const canvas = document.querySelector('canvas');
@@ -42,11 +42,6 @@ function update() {
         if (point.x == 0 || point.x == canvas.width) point.vx *= -1;
         if (point.y == 0 || point.y == canvas.height) point.vy *= -1;
 
-        ctx.fillStyle = '#0078D7'
-        ctx.strokeStyle = '#0078D7'
-        // ctx.beginPath();
-        // ctx.arc(point.x, point.y, 10, 0, Math.PI * 2);
-        // ctx.fill();
 
         points.forEach(other => {
             if (point === other) return;
@@ -54,7 +49,13 @@ function update() {
             const dy = point.y - other.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
 
-            if (minDistance < dist && dist < maxDistance) {
+            let alpha = dist < fadeStartDistance ? 1 : (1 - (dist - fadeStartDistance) / (maxDistance - fadeStartDistance));
+            alpha = Math.max(0, Math.min(1, alpha));
+            ctx.globalAlpha = alpha;
+
+            ctx.strokeStyle = `#0078d7ff`;
+
+            if (dist < maxDistance) {
                 ctx.beginPath();
                 ctx.moveTo(point.x, point.y);
                 ctx.lineTo(other.x, other.y);
