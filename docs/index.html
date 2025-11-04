@@ -4,121 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SynOpp AS</title>
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-
-        h1,h2,p {
-            margin: 0;
-        }
-
-        section {
-            width: 100vw;
-            height: 70vh;
-            display: flex;
-        }
-
-        section:nth-child(2) {
-            background-color: #eee;
-        }
-
-        .center {
-            justify-content: center;
-            align-items: center;
-        }
-
-        .brand {
-            display: grid;
-            grid-template-areas: "logo title" "logo slogan";
-        }
-        .brand img {
-            grid-area: logo;
-            width: 100px;
-            height: auto;
-            margin-right: 20px;
-        }
-        .brand h1 {
-            grid-area: title;
-            align-self: end;
-        }
-        .brand p {
-            grid-area: slogan;
-        }
-
-        .cards {
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .card {
-            width: 300px;
-            height: 500px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            background-color: white;
-        }
-
-        .card img {
-            width: 100%;
-            height: calc(100% - 70px);
-            object-fit: cover;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-
-        .card h2, .card p {
-            padding: 4px;
-        }
-
-        .card h2 {
-            padding-bottom: 0;
-        }
-
-        form {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 48px;
-            border: 1px solid #eee;
-        }
-
-        form p {
-            margin-bottom: 16px;
-        }
-        
-        label {
-            display: block;
-            opacity: .6;
-        }
-        input, textarea {
-            width: 100%;
-            margin-bottom: 12px;
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <section class="center">
+    <section>
         <div class="brand">
             <img src="https://raw.githubusercontent.com/SynOpp/.github/refs/heads/main/branding/logo-transparent.png" />
             <h1>SynOpp AS</h1>
             <p>Vi lager it-løsninger for store og små bedrifter.</p>
         </div>
     </section>
-    <section class="cards">
+    <section>
         <article class="card">
             <img src="./ole.jpg" >
             <h2>Ole Kristian Ågotnes</h2>
             <p>Grunnlegger og løsningsorientert</p>
+            <a href="mailto:ole@synopp.no">ole@synopp.no</a>
         </article>
         <article class="card">
             <img src="./mats.jpg" >
             <h2>Mats Dyrøy</h2>
             <p>Grunnlegger og supernerd</p>
+            <a href="mailto:mats@synopp.no">mats@synopp.no</a>
         </article>
     </section>
-    <section class="center">
+    <section>
         <form>
             <h1>Kontakt oss</h1>
             <p>Har du en idé til et prosjekt? Vi vil gjerne høre fra deg!</p>
