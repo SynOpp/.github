@@ -1,3 +1,17 @@
+:root {
+    --brand: #0078D7;
+    --on-brand: white;
+    --background: white;
+    --surface: white;
+    --on-surface: #222;
+
+    background-color: var(--background);
+}
+
+body {
+    position: relative;
+}
+
 body,h1,h2,p {
     margin: 0;
     font-family: sans-serif;
@@ -10,15 +24,15 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &:nth-child(2) {
-        background-color: #eee;
-    }
 }
 
 .brand {
     display: grid;
     grid-template-areas: "logo title" "logo slogan";
+    backdrop-filter: blur(10px);
+    background-color: color-mix(in srgb, var(--background) 50%, transparent);
+    padding: 24px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 
     img {
         grid-area: logo;
@@ -43,7 +57,8 @@ section {
     max-width: 456px;
     max-height: 624px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    background-color: white;
+    background-color: var(--surface);
+    color: var(--on-surface);
     margin: 24px;
 
     img {
@@ -70,10 +85,20 @@ section {
     }
 }
 
+.cards {
+    background-color: color-mix(in srgb, var(--surface) 20%, transparent);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
 form {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     padding: 48px;
     border: 1px solid #eee;
+    width: 80%;
+    background-color: var(--surface);
+    color: var(--on-surface);
+    max-width: 512px;
 
     p {
         margin-bottom: 16px;
@@ -87,5 +112,48 @@ form {
     input, textarea {
         width: 100%;
         margin-bottom: 12px;
+    }
+
+    button {
+        background-color: var(--brand);
+        border: 1px solid var(--brand);
+        color: var(--on-brand);
+        font: inherit;
+        padding: 12px 24px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    button:hover,
+    button:focus {
+        background-color: color-mix(in srgb, var(--brand) 90%, var(--on-brand));
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    button:active {
+        background-color: color-mix(in srgb, var(--brand) 80%, var(--on-brand));
+    }
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+@media (max-width: 640px) {
+    .cards {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 80%;
+        height: auto;
+        max-width: none;
+        max-height: none;
     }
 }
