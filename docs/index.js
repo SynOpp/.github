@@ -1,7 +1,7 @@
 const pointsPerPixel = 0.0004;
 const maxDistance = 100;
 const fadeStartDistance = 90;
-const speed = .3;
+const speed = 5;
 const margin = 100;
 
 const canvas = document.querySelector('canvas');
@@ -28,11 +28,15 @@ for (let i = 0; i < pointCount; i++) {
     });
 }
 
+let time = Date.now();
 function update() {
+    const deltaTime = (Date.now() - time) / 1000;
+    time = Date.now();
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     points.forEach(point => {
-        point.x += point.vx;
-        point.y += point.vy;
+        point.x += point.vx * deltaTime;
+        point.y += point.vy * deltaTime;
 
         if (point.x < 0) point.x = 0;
         if (point.x > canvas.width) point.x = canvas.width;
