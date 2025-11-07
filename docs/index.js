@@ -2,31 +2,45 @@ const pointsPerPixel = 0.0004;
 const maxDistance = 100;
 const fadeStartDistance = 90;
 const speed = 5;
-const margin = 100;
+const margin = 5;
 
 const canvas = document.querySelector('canvas');
-canvas.width = document.body.clientWidth;
-canvas.height = document.body.scrollHeight;
-const ctx = canvas.getContext('2d');
 
-const pointCount = pointsPerPixel * canvas.width * canvas.height;
-console.log(`Creating ${pointCount} points`);
+canvas.width = document.body.clientWidth * window.devicePixelRatio;
+canvas.height = document.body.scrollHeight * window.devicePixelRatio;
+const ctx = canvas.getContext('2d');
 const points = [];
 
-for (let i = 0; i < pointCount; i++) {
-    let vx = (Math.random() - 0.5);
-    let vy = (Math.random() - 0.5);
-    let vl = Math.sqrt(vx * vx + vy * vy);
-    vx = (vx / vl) * speed;
-    vy = (vy / vl) * speed;
+function createPoints() {
+    const pointCount = pointsPerPixel * canvas.width * canvas.height;
+    console.log(`Creating ${pointCount} points`);
 
-    points.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx,
-        vy
-    });
+    points.splice(0);
+
+    for (let i = 0; i < pointCount; i++) {
+        let vx = (Math.random() - 0.5);
+        let vy = (Math.random() - 0.5);
+        let vl = Math.sqrt(vx * vx + vy * vy);
+        vx = (vx / vl) * speed;
+        vy = (vy / vl) * speed;
+
+        points.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx,
+            vy
+        });
+    }
 }
+
+function onResize() {
+    canvas.width = document.body.clientWidth * window.devicePixelRatio;
+    canvas.height = document.body.scrollHeight * window.devicePixelRatio;
+    createPoints();
+}
+
+window.addEventListener('resize', onResize);
+createPoints();
 
 let time = Date.now();
 function update() {
@@ -38,10 +52,10 @@ function update() {
         point.x += point.vx * deltaTime;
         point.y += point.vy * deltaTime;
 
-        if (point.x < 0) point.x = 0;
-        if (point.x > canvas.width) point.x = canvas.width;
-        if (point.y < 0) point.y = 0;
-        if (point.y > canvas.height) point.y = canvas.height;
+        if (point.x < -margin) point.x = -margin;
+        if (point.x > canvas.width + margin) point.x = canvas.width + margin;
+        if (point.y < -margin) point.y = -margin;
+        if (point.y > canvas.height + margin) point.y = canvas.height + margin;
 
         if (point.x == 0 || point.x == canvas.width) point.vx *= -1;
         if (point.y == 0 || point.y == canvas.height) point.vy *= -1;
