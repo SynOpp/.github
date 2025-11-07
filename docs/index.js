@@ -6,13 +6,11 @@ const margin = 5;
 
 const canvas = document.querySelector('canvas');
 
-canvas.width = document.body.clientWidth * window.devicePixelRatio;
-canvas.height = document.body.scrollHeight * window.devicePixelRatio;
 const ctx = canvas.getContext('2d');
 const points = [];
 
 function createPoints() {
-    const pointCount = pointsPerPixel * document.body.clientWidth * document.body.scrollHeight;
+    const pointCount = pointsPerPixel * canvas.width * canvas.height;
     console.log(`Creating ${pointCount} points`);
 
     points.splice(0);
@@ -25,8 +23,8 @@ function createPoints() {
         vy = (vy / vl) * speed;
 
         points.push({
-            x: Math.random() * canvas.width * window.devicePixelRatio,
-            y: Math.random() * canvas.height * window.devicePixelRatio,
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
             vx,
             vy
         });
@@ -34,13 +32,13 @@ function createPoints() {
 }
 
 function onResize() {
-    canvas.width = document.body.clientWidth * window.devicePixelRatio;
-    canvas.height = document.body.scrollHeight * window.devicePixelRatio;
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.scrollHeight;
     createPoints();
 }
 
 window.addEventListener('resize', onResize);
-createPoints();
+onResize();
 
 let time = Date.now();
 function update() {
